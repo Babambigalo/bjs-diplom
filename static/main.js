@@ -58,101 +58,128 @@ class Profile {
         });
     }
 
-    get currentCurrency(){
+    currentCurrency(){
+        ApiConnector.getStocks
 
     }
 
 }
 
 function main(){
-    // const Ivan = new Profile({
-    //     username: 'ivan',
-    //     name: { firstName: 'Ivan', lastName: 'Chernyshev' },
-    //     password: 'ivanspass'
-    // });
+    const Ivan = new Profile({
+        username: 'ivan',
+        name: { firstName: 'Ivan', lastName: 'Chernyshev' },
+        password: 'ivanspass'
+    });
 
 
-    // //сначала создаем и авторизуем пользователя
-    // Ivan.createUser((err,data) =>{
-    //     if (err) {
-    //         console.error('Error during creating user Ivan');
-    //     } else {
-    //         console.log(`User Ivan has been created`);
-    //     }
-    // });
-    // Ivan.performLogin((err,data)=> {
-    //     if (err) {
-    //         console.error('Error during login user Ivan');
-    //     } else {
-    //         console.log(`User Ivan has been logined`);
-    //     }
-    // });
+    //сначала создаем и авторизуем пользователя
+    Ivan.createUser((err,data) =>{
+        if (err) {
+            console.error('Error during creating user Ivan');
+        } else {
+            console.log(data);
+            console.log(`User Ivan has been created`);
+        }
+    });
 
-    // Ivan.getStocks((err,data) => {
-    //     if(err) {
-    //         console.error('Error during get stocks for Ivan');
-    //     } else {
-    //         console.log(`User Ivan has been got stocks`);
-    //     }        
-    // })
-    // // после того, как мы авторизовали пользователя, добавляем ему денег в кошелек
-    // Ivan.addMoney({ currency:'RUB', amount: 100 }, (err, data) => {        
-    //     if (err) {
-    //         console.error('Error during adding money to Ivan');
-    //     }else{
-    //         console.log('Money has been added to Ivan');
-    //     }
-    // });
+    Ivan.performLogin((err,data)=> {
+        if (err) {
+            console.error('Error during login user Ivan');
+        } else {
+            console.log(`User Ivan has been logined`);
+        }
+    });
 
-    const Vasya = new Profile({
-        username: 'vasya',
-        name: { firstName: 'Vasyliy', lastName: 'Antonochkin' },
-        password: 'vasyaspass'
+    Ivan.getStocks((err,data) => {
+        if(err) {
+            console.error('Error during get stocks for Ivan');
+        } else {
+            console.log(`User Ivan has been got stocks`);
+        }        
+    })
+
+
+    //после того, как мы авторизовали пользователя, добавляем ему денег в кошелек
+    Ivan.addMoney({ currency:'EUR', amount: 500000 }, (err, data) => {        
+        //console.log(data,err);
+        if (err) {
+            console.error('Error during adding money to Ivan');
+        }else{
+            console.log('Money has been added to Ivan');
+        }
+    });
+
+    Ivan.convertMoney({fromCurrency:'EUR',targetCurrency:'NETCOIN',targetAmount:50000}, (err,data) => {
+        console.log(err,data);
+        if (err) {
+            console.error('Error during convert money for Ivan');
+        }else{
+            console.log('Money has been converted for Ivan');
+        }
+    })
+
+    Ivan.transferMoney({to:'petya',amount:50000},(err,data) => {
+        console.log(err,data);
+        if (err) {
+            console.error('Error during transfer money to Petya');
+        } else {
+            console.log(`User Petya transfered money`);
+        }
+    })
+
+
+    const Petya = new Profile({
+        username: 'petya',
+        name: { firstName: 'Petr', lastName: 'Antonochkin' },
+        password: 'petyaspass'
         
     })
 
-    // Vasya.createUser((err,data) =>{
-    //     if (err) {
-    //         console.error('Error during creating user Vasya');
-    //     } else {
-    //         console.log(`User Vasya has been created`);
-    //     }
-    // });
-
-    Vasya.performLogin((err,data)=> {
+    Petya.createUser((err,data) =>{
         if (err) {
-            console.error('Error during login user Vasya');
+            console.error('Error during creating user Petya');
         } else {
-            console.log(`User Vasya has been logined`);
+            console.log(`User Petya has been created`);
         }
     });
 
-    Vasya.addMoney({ currency:'EUR', amount: 500000 }, (err, data) => {        
+    Petya.performLogin((err,data)=> {
         if (err) {
-            console.error('Error during adding money to Vasya');
-        }else{
-            console.log('Money has been added to Vasya');
+            console.error('Error during login user Petya');
+        } else {
+            console.log(`User Petya has been logined`);
         }
     });
 
-    Vasya.convertMoney({fromCurrency:'EUR',targetCurrency:'NETCOIN',targetAmount:500000}, (err,data) => {
+    Petya.addMoney({ currency:'EUR', amount: 0 }, (err, data) => {
+        console.log(data);        
+        if (err) {
+            console.error('Error during adding money to Petya');
+        }else{
+            console.log('Money has been added to Petya');
+        }
+    });
+
+    Petya.convertMoney({fromCurrency:'EUR',targetCurrency:'NETCOIN',targetAmount:500000}, (err,data) => {
         console.log(data);
         if (err) {
-            console.error('Error during convert money for Vasya');
+            console.error('Error during convert money for Petya');
         }else{
-            console.log('Money has been converted for Vasya');
+            console.log('Money has been converted for Petya');
         }
     })
 
 
 
-    Vasya.getStocks((err,data) => {
+    Petya.getStocks((err,data) => {
         if(err) {
-            console.error('Error during get stocks for Vasya');
+            console.error('Error during get stocks for Petya');
         } else {
-            console.log(`User Vasya has been got stocks`);
+            console.log(`User Petya has been got stocks`);
         }        
     })
 }
 
 main();
+
