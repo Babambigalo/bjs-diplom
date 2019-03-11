@@ -66,7 +66,33 @@ class Profile {
 }
 
 function main(){
-    
+
+    const Petya = new Profile({
+        username: 'petya',
+        name: { firstName: 'Petr', lastName: 'Antonochkin' },
+        password: 'petyaspass'        
+    });
+
+    Petya.createUser((err,data) =>{
+        (err) ? console.error('Error during creating user Petya') : console.log(`User Petya has been created`);
+    });
+
+    Petya.performLogin((err,data)=> {
+        (err) ? console.error('Error during login user Petya') : console.log(`User Petya has been logined`);
+    });
+
+    Petya.addMoney({ currency:'EUR', amount: 0 }, (err, data) => {
+        (err) ? console.error('Error during adding money to Petya') : console.log('Money has been added to Petya');
+    });
+
+    Petya.convertMoney({fromCurrency:'EUR',targetCurrency:'NETCOIN',targetAmount:500000}, (err,data) => {
+        (err) ? console.error('Error during convert money for Petya') : console.log('Money has been converted for Petya');
+    });
+
+    Petya.getStocks((err,data) => {
+        (err) ? console.error('Error during get stocks for Petya') : console.log(`User Petya has been got stocks`);      
+    });
+
     const Ivan = new Profile({
         username: 'ivan',
         name: { firstName: 'Ivan', lastName: 'Chernyshev' },
@@ -99,32 +125,6 @@ function main(){
 
     Ivan.transferMoney({to:'petya',amount:50000},(err,data) => {
         (err) ? console.error('Error during transfer money to Petya') : console.log(`User Petya transfered money`);
-    });
-
-    const Petya = new Profile({
-        username: 'petya',
-        name: { firstName: 'Petr', lastName: 'Antonochkin' },
-        password: 'petyaspass'        
-    });
-
-    Petya.createUser((err,data) =>{
-        (err) ? console.error('Error during creating user Petya') : console.log(`User Petya has been created`);
-    });
-
-    Petya.performLogin((err,data)=> {
-        (err) ? console.error('Error during login user Petya') : console.log(`User Petya has been logined`);
-    });
-
-    Petya.addMoney({ currency:'EUR', amount: 0 }, (err, data) => {
-        (err) ? console.error('Error during adding money to Petya') : console.log('Money has been added to Petya');
-    });
-
-    Petya.convertMoney({fromCurrency:'EUR',targetCurrency:'NETCOIN',targetAmount:500000}, (err,data) => {
-        (err) ? console.error('Error during convert money for Petya') : console.log('Money has been converted for Petya');
-    });
-
-    Petya.getStocks((err,data) => {
-        (err) ? console.error('Error during get stocks for Petya') : console.log(`User Petya has been got stocks`);      
     });
 }
 
